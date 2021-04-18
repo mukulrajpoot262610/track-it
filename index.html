@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/earth-globe.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <link defer rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <title>Track It</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dashboard">
+
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="./images/earth-globe.svg" alt="">
+                </div>
+                <div class="links">
+                    <i class="fas fa-virus"></i>
+                    <i class="fas fa-cloud-sun-rain active"></i>
+                </div>
+                <div class="account"></div>
+
+            </nav>
+
+            <main class="main">
+                <div class="weather">
+                    <form action="submit" class="input-container">
+                        <input type="search" placeholder="Search Weather Data">
+                        <i class="fas fa-search-location"></i>
+                    </form>
+
+                    <div class="weather-timezone"></div>
+                    <div class="weather-img"></div>
+                    <div class="weather-type"></div>
+                    <div class="weather-temp"></div>
+                    <div class="weather-data"></div>
+                </div>
+            </main>
+
+            <div class="map" id="map"></div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
