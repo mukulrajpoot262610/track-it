@@ -29,6 +29,10 @@ html {
   align-items: center;
 }
 
+.covid {
+  display: none;
+}
+
 .dashboard {
   height: 90vh;
   width: 90%;
@@ -54,7 +58,7 @@ html {
 }
 
 .logo img {
-  height: 3rem;
+  height: 5rem;
 }
 
 .links {
@@ -78,8 +82,9 @@ html {
   border-bottom-left-radius: 2rem;
 }
 
-/* .main {
-} */
+.main {
+  position: relative;
+}
 
 .map {
   border-top-right-radius: 2rem;
@@ -101,12 +106,12 @@ html {
 
 .input-container i {
   cursor: pointer;
-  color: var(--main-color);
+  color: var(--main-font);
 }
 
 .input-container input {
   width: 100%;
-  color: black;
+  color: var(--main-font);
   padding: 2rem;
   font-size: 2rem;
   background: none;
@@ -160,6 +165,22 @@ html {
   margin-right: 2rem;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  width: 100%;
+  padding: 3rem;
+  color: var(--main-font);
+  background: var(--secondary-background);
+}
+
+.footer h1 {
+  text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
   .map {
     display: none;
@@ -168,6 +189,10 @@ html {
   .dashboard {
     grid-template-columns: 0.5fr 3fr;
   }
+}
+
+.footer {
+  border-bottom-right-radius: 2rem;
 }
 
 @media screen and (max-width: 500px) {

@@ -1,12 +1,33 @@
 const mapContainer = document.getElementById("map");
-const container = document.querySelector(".container");
+const covidBtn = document.getElementById("covid");
+const weatherBtn = document.getElementById("weather");
 
+const container = document.querySelector(".container");
+const covidContainer = document.querySelector(".covid");
+const weatherContainer = document.querySelector(".weather");
 const labelTimezone = document.querySelector(".weather-timezone");
 const labelImage = document.querySelector(".weather-img");
 const labelType = document.querySelector(".weather-type");
 const labelTemp = document.querySelector(".weather-temp");
 const labelWindSpeed = document.querySelector(".weather-windspeed");
 const labelHumidity = document.querySelector(".weather-humidity");
+
+//////////////////////////////////////////////////////////////
+// ROUTING
+
+covidBtn.addEventListener("click", () => {
+  covidBtn.classList.add("active");
+  weatherBtn.classList.remove("active");
+  covidContainer.style.display = "flex";
+  weatherContainer.style.display = "none";
+});
+
+weatherBtn.addEventListener("click", () => {
+  covidBtn.classList.remove("active");
+  weatherBtn.classList.add("active");
+  weatherContainer.style.display = "block";
+  covidContainer.style.display = "none";
+});
 
 navigator.geolocation.getCurrentPosition(
   function (position) {
@@ -21,11 +42,9 @@ navigator.geolocation.getCurrentPosition(
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(mymap);
 
-    L.marker(coords).addTo(mymap);
-
     mymap.on("click", function (mapEvent) {
       const { lat, lng } = mapEvent.latlng;
-      //   L.marker([lat, lng]).addTo(mymap);
+      L.marker([lat, lng]).addTo(mymap);
 
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=cb7fa1df4f862242c79d99d4e50959e6&units=metric
       `;
@@ -61,12 +80,11 @@ function displayUi(data, data1) {
 
   labelTimezone.innerHTML = `<i class="fas fa-map-marker-alt"></i>  ${check}, ${data1.address.state_district}`;
 
-  // IMAGES
   labelImage.innerHTML = `<img src="../images/${data.current.weather[0].main}.svg" alt="Sun" />`;
 
   labelType.textContent = data.current.weather[0].main;
   labelTemp.textContent = data.current.temp + " °";
   labelWindSpeed.innerHTML = `<i class="fas fa-wind"></i> ${data.current.wind_speed} m/s`;
   labelHumidity.innerHTML = `<i class="fas fa-tint"></i> ${data.current.humidity} %`;
-  console.log(data);
+  console.log(data1);
 }
