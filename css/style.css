@@ -5,7 +5,7 @@
   --secondary-color: #804eff;
   --main-background: #fff;
   --secondary-background: #f6f8ff;
-  --main-font: #7b48ff;
+  --main-font: #1e1730;
   --secondary-font: #8a93b4;
 }
 
@@ -44,6 +44,7 @@ html {
   border-bottom-left-radius: 2rem;
   display: grid;
   grid-template-rows: 1fr 5fr 1.5fr;
+  background: var(--secondary-background);
 }
 
 .logo {
@@ -53,7 +54,7 @@ html {
 }
 
 .logo img {
-  height: 3vw;
+  height: 3rem;
 }
 
 .links {
@@ -89,14 +90,13 @@ html {
 .input-container {
   background-color: var(--secondary-background);
   width: 80%;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
   padding: 0 2rem;
   border-radius: 2rem;
-  margin-top: 4rem;
+  margin: 4rem auto;
 }
 
 .input-container i {
@@ -111,4 +111,71 @@ html {
   font-size: 2rem;
   background: none;
   border: none;
+}
+
+.weather-timezone {
+  display: flex;
+  color: var(--main-font);
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.weather-timezone i {
+  margin: 0rem 2rem;
+}
+
+.weather-img {
+  display: grid;
+  place-items: center;
+  margin: 5rem 0;
+}
+
+.weather-img img {
+  height: 20vh;
+}
+
+.weather-type {
+  font-size: 2rem;
+  color: var(--secondary-font);
+  text-align: center;
+}
+
+.weather-temp {
+  font-size: 10rem;
+  color: var(--main-font);
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.weather-data {
+  display: flex;
+  color: var(--secondary-font);
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-windspeed {
+  margin-right: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .map {
+    display: none;
+  }
+
+  .dashboard {
+    grid-template-columns: 0.5fr 3fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+
+  .dashboard {
+    grid-template-columns: 0.5fr 3fr;
+  }
 }

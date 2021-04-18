@@ -5,7 +5,8 @@ const labelTimezone = document.querySelector(".weather-timezone");
 const labelImage = document.querySelector(".weather-img");
 const labelType = document.querySelector(".weather-type");
 const labelTemp = document.querySelector(".weather-temp");
-const labelData = document.querySelector(".weather-data");
+const labelWindSpeed = document.querySelector(".weather-windspeed");
+const labelHumidity = document.querySelector(".weather-humidity");
 
 navigator.geolocation.getCurrentPosition(
   function (position) {
@@ -29,12 +30,15 @@ navigator.geolocation.getCurrentPosition(
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=cb7fa1df4f862242c79d99d4e50959e6&units=metric
       `;
 
-      let formattedAddressUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&bounds=34.172684,
-      -118.604794|34.236144,-118.500938&key=AIzaSyBAWzZ1ml6ezkv0hJAYJH1ivpMoXyOzykg`;
+      let formattedAddressUrl = `https://us1.locationiq.com/v1/reverse.php?key=pk.92a9a09baf84e5f44c4ce89ca413c9ed&lat=${lat}&lon=${lng}&format=json`;
 
-      fetch(url)
+      fetch(formattedAddressUrl)
         .then((response) => response.json())
-        .then((data) => displayHot(data));
+        .then((data1) => {
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => displayUi(data, data1));
+        });
     });
   },
   function () {
@@ -44,25 +48,25 @@ navigator.geolocation.getCurrentPosition(
 
 //////////////////////////////////////////////////////////////
 // DISPLAY HOT
-function displayHot(data) {
+function displayUi(data, data1) {
+  let check =
+    data1.address.road ||
+    data1.address.village ||
+    data1.address.suburb ||
+    data1.address.town ||
+    data1.address.county;
+
   container.style.background =
     "linear-gradient(120deg, #f6d365 0%, #fda085 100%)";
-  labelTimezone.textContent = data.timezone;
+
+  labelTimezone.innerHTML = `<i class="fas fa-map-marker-alt"></i>  ${check}, ${data1.address.state_district}`;
+
+  // IMAGES
+  labelImage.innerHTML = `<img src="../images/${data.current.weather[0].main}.svg" alt="Sun" />`;
+
+  labelType.textContent = data.current.weather[0].main;
+  labelTemp.textContent = data.current.temp + " °";
+  labelWindSpeed.innerHTML = `<i class="fas fa-wind"></i> ${data.current.wind_speed} m/s`;
+  labelHumidity.innerHTML = `<i class="fas fa-tint"></i> ${data.current.humidity} %`;
   console.log(data);
-}
-
-//////////////////////////////////////////////////////////////
-// DISPLAY RAINY
-function displayRainy(data) {
-  container.style.background =
-    "linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)";
-  labelTimezone.textContent = data.timezone;
-}
-
-//////////////////////////////////////////////////////////////
-// DISPLAY CLOUDY
-function displaCloudy(data) {
-  container.style.background =
-    "linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%)";
-  labelTimezone.textContent = data.timezone;
 }
