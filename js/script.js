@@ -83,6 +83,10 @@ navigator.geolocation.getCurrentPosition(
           L.marker(coords).addTo(mymap);
           getGeodata(lat, lng);
           mymap.flyTo(coords, 15);
+        })
+        .catch((err) => {
+          labelImage.innerHTML = `<img src="../images/not-found.svg" alt="Sun" />`;
+          clearUi();
         });
 
       input.value = "";
@@ -115,7 +119,16 @@ function displayUi(data, data1) {
   labelTemp.textContent = data.current.temp + " °";
   labelWindSpeed.innerHTML = `<i class="fas fa-wind"></i> ${data.current.wind_speed} m/s`;
   labelHumidity.innerHTML = `<i class="fas fa-tint"></i> ${data.current.humidity} %`;
-  console.log(data1);
+}
+
+//////////////////////////////////////////////////////////////
+// CLEAR UI
+function clearUi() {
+  labelTimezone.innerHTML = ``;
+  labelType.textContent = "";
+  labelTemp.textContent = "";
+  labelWindSpeed.innerHTML = ``;
+  labelHumidity.innerHTML = ``;
 }
 
 ////////////////////////////////////////////////////////
