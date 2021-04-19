@@ -14,7 +14,6 @@ const labelHumidity = document.querySelector(".weather-humidity");
 
 //////////////////////////////////////////////////////////////
 // ROUTING
-
 covidBtn.addEventListener("click", () => {
   covidBtn.classList.add("active");
   weatherBtn.classList.remove("active");
@@ -29,12 +28,28 @@ weatherBtn.addEventListener("click", () => {
   covidContainer.style.display = "none";
 });
 
+//////////////////////////////////////////////////////////////
+// GET MAP
+function getGeodata(lat, lng) {
+  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=cb7fa1df4f862242c79d99d4e50959e6&units=metric
+      `;
+
+  let formattedAddressUrl = `https://us1.locationiq.com/v1/reverse.php?key=pk.92a9a09baf84e5f44c4ce89ca413c9ed&lat=${lat}&lon=${lng}&format=json`;
+
+  fetch(formattedAddressUrl)
+    .then((response) => response.json())
+    .then((data1) => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => displayUi(data, data1));
+    });
+}
+
 navigator.geolocation.getCurrentPosition(
   function (position) {
     const { latitude, longitude } = position.coords;
-    console.log(latitude, longitude);
+    // console.log(latitude, longitude);
     const coords = [latitude, longitude];
-
     const mymap = L.map("map").setView(coords, 15);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -45,19 +60,33 @@ navigator.geolocation.getCurrentPosition(
     mymap.on("click", function (mapEvent) {
       const { lat, lng } = mapEvent.latlng;
       L.marker([lat, lng]).addTo(mymap);
+      mymap.flyTo([lat, lng], 15);
+      getGeodata(lat, lng);
+    });
 
-      let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=cb7fa1df4f862242c79d99d4e50959e6&units=metric
-      `;
+    //////////////////////////////////////////////////////////////
+    // IMPLEMENTING SEARCH
+    const input = document.getElementById("input-field");
+    const inputBtn = document.querySelector(".fa-search-location");
 
-      let formattedAddressUrl = `https://us1.locationiq.com/v1/reverse.php?key=pk.92a9a09baf84e5f44c4ce89ca413c9ed&lat=${lat}&lon=${lng}&format=json`;
+    inputBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let searchedQuery = input.value;
 
-      fetch(formattedAddressUrl)
+      const fGeocoding = `http://api.openweathermap.org/data/2.5/weather?q=${searchedQuery}&appid=cb7fa1df4f862242c79d99d4e50959e6&units=metric`;
+
+      fetch(fGeocoding)
         .then((response) => response.json())
-        .then((data1) => {
-          fetch(url)
-            .then((response) => response.json())
-            .then((data) => displayUi(data, data1));
+        .then((data2) => {
+          const { lat, lon: lng } = data2.coord;
+          let coords = [lat, lng];
+          L.marker(coords).addTo(mymap);
+          getGeodata(lat, lng);
+          mymap.flyTo(coords, 15);
         });
+
+      input.value = "";
+      input.blur();
     });
   },
   function () {
@@ -66,7 +95,7 @@ navigator.geolocation.getCurrentPosition(
 );
 
 //////////////////////////////////////////////////////////////
-// DISPLAY HOT
+// DISPLAY UI
 function displayUi(data, data1) {
   let check =
     data1.address.road ||
@@ -88,3 +117,9 @@ function displayUi(data, data1) {
   labelHumidity.innerHTML = `<i class="fas fa-tint"></i> ${data.current.humidity} %`;
   console.log(data1);
 }
+
+////////////////////////////////////////////////////////
+// USES three APIs
+// 1) forward geocoding
+// 2) reverse geocoding
+// 3) leaflet
