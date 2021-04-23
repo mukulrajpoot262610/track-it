@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 
 :root {
-  --main-color: #7b48ff;
-  --secondary-color: #804eff;
   --main-background: #fff;
   --secondary-background: #f6f8ff;
   --main-font: #1e1730;
@@ -30,7 +28,7 @@ html {
 }
 
 .covid {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -125,6 +123,10 @@ html {
   font-size: 2rem;
   background: none;
   border: none;
+}
+
+.weather {
+  display: none;
 }
 
 .weather-timezone {
