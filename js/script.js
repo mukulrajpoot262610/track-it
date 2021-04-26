@@ -51,7 +51,6 @@ newsBtn.addEventListener("click", () => {
   newsBtn.classList.add("active");
   weatherContainer.style.display = "none";
   covidContainer.style.display = "none";
-  mapContainer.style.display = "none";
   main.style.display = "flex";
   newsContainer.style.display = "flex";
 });
@@ -164,8 +163,18 @@ navigator.geolocation.getCurrentPosition(
     //////////////////////////////////////////////////////////////
     // WEATHER DATA
     weatherBtn.addEventListener("click", () => {
-      main.style.display = "flex";
-      mapContainer.style.display = "none";
+      const mediaQuery = window.matchMedia("(max-width: 1000px)");
+      function handleTabletChange(e) {
+        if (e.matches) {
+          console.log("Media Query Matched!");
+          if (!covidBtn.classList.contains("active")) {
+            map.style.display = "none";
+            main.style.display = "flex";
+          }
+        }
+      }
+      mediaQuery.addListener(handleTabletChange);
+      handleTabletChange(mediaQuery);
       mymap.remove();
       const myWeathermap = L.map("map").setView(coords, 4);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
