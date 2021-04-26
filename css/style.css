@@ -121,8 +121,8 @@ html {
 }
 
 .weather {
-  display: none;
   width: 100%;
+  display: none;
 }
 
 .weather-timezone {
