@@ -1,83 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="./css/style.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./images/earth-globe.svg" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" />
-    <link defer rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <link rel="stylesheet" href="./css/utility.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./images/earth-globe.svg"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link
+      defer
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
     <title>Track It</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="dashboard">
+      <div class="dashboard">
+        <nav class="navbar">
+          <div class="logo">
+            <img src="./images/earth-globe.svg" alt="" />
+          </div>
+          <div class="links">
+            <i class="fas fa-virus active" id="covid"></i>
+            <i class="fas fa-cloud-sun-rain" id="weather"></i>
+            <i class="far fa-newspaper" id="news"></i>
+          </div>
+          <div class="account"></div>
+        </nav>
 
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="./images/earth-globe.svg" alt="">
-                </div>
-                <div class="links">
-                    <i class="fas fa-virus active" id="covid"></i>
-                    <i class="fas fa-cloud-sun-rain" id="weather"></i>
-                    <i class="far fa-newspaper" id="news"></i>
-                </div>
-                <div class="account"></div>
+        <main class="main">
+          <div class="weather">
+            <div class="input-container">
+              <input
+                type="search"
+                placeholder="Search Weather Data"
+                id="input-field"
+              />
+              <i class="fas fa-search-location"></i>
+            </div>
 
-            </nav>
+            <h1 class="weather-timezone"></h1>
+            <div class="weather-img"></div>
+            <h1 class="weather-type"></h1>
+            <h1 class="weather-temp"></h1>
+            <div class="weather-data">
+              <h1 class="weather-windspeed"></h1>
+              <h1 class="weather-humidity"></h1>
+            </div>
+            <div class="footer">
+              <h1>Made with 💖 by Mukul Rajpoot</h1>
+            </div>
+          </div>
 
-            <main class="main">
-                <div class="weather">
-                    <div class="input-container">
-                        <input type="search" placeholder="Search Weather Data" id="input-field">
-                        <i class="fas fa-search-location"></i>
-                    </div>
+          <div class="covid">
+            <div class="covid-header">
+              <h4>Covid 19 Tracker</h4>
+              <br />
+              <h1 class="label-country">Click on Map</h1>
+              <h4 class="label-date"></h4>
+            </div>
+            <div class="covid-data">
+              <div class="data-card">
+                <h4>ACTIVE</h4>
+                <h1 class="label-active red"></h1>
+              </div>
+              <div class="data-card">
+                <h4>RECOVERED</h4>
+                <h1 class="label-recovered green"></h1>
+              </div>
+              <div class="data-card">
+                <h4>DEATHS</h4>
+                <h1 class="label-death grey"></h1>
+              </div>
+            </div>
+            <div class="footer">
+              <h1>Made with 💖 by Mukul Rajpoot</h1>
+            </div>
+          </div>
 
-                    <h1 class="weather-timezone"></h1>
-                    <div class="weather-img"></div>
-                    <h1 class="weather-type"></h1>
-                    <h1 class="weather-temp"></h1>
-                    <div class="weather-data">
-                        <h1 class="weather-windspeed"></h1>
-                        <h1 class="weather-humidity"></h1>
-                    </div>
-                    <div class="footer">
-                        <h1>Made with 💖 by Mukul Rajpoot</h1>
-                    </div>
-                </div>
+          <div class="news">
+            <h1>Covid News 📰</h1>
+            <br />
+            <h1>Construction is going on</h1>
+            <br />
+            <br />
+            <img src="./images/crane.svg" />
+            <div class="footer">
+              <h1>Made with 💖 by Mukul Rajpoot</h1>
+            </div>
+          </div>
+        </main>
 
-                <div class="covid">
-                    <h1>COVID-19 Tracker</h1>
-                    <h1>Construction is going on</h1>
-                    <img src="./images/crane.svg" alt="Not found">
-                    <div class="footer">
-                        <h1>Made with 💖 by Mukul Rajpoot</h1>
-                    </div>
-                </div>
-
-                <div class="news">
-                    <div class="footer">
-                        <h1>Made with 💖 by Mukul Rajpoot</h1>
-                    </div>
-                </div>
-            </main>
-
-            <div class="map" id="map"></div>
-        </div>
+        <div class="map mapLaptop" id="map"></div>
+      </div>
     </div>
 
     <script src="./js/script.js"></script>
-</body>
-
+  </body>
 </html>

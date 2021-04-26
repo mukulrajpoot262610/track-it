@@ -27,19 +27,6 @@ html {
   align-items: center;
 }
 
-.covid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-}
-
-.covid img {
-  margin-top: 10rem;
-  width: 20rem;
-}
-
 .dashboard {
   height: 90vh;
   width: 90%;
@@ -109,6 +96,14 @@ html {
   padding: 0 2rem;
   border-radius: 2rem;
   margin: 4rem auto;
+}
+
+.input-container select {
+  width: 100%;
+  padding: 2rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
 }
 
 .input-container i {
@@ -192,8 +187,67 @@ html {
   text-align: center;
 }
 
+/* ///// COVID PART  */
+.covid {
+  display: grid;
+  /* grid-template-rows: 1fr 1fr;/ */
+}
+
+.covid-header {
+  height: 30vh;
+  background: url("../images/virus-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  width: 100%;
+  padding: 2rem;
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+.covid-data {
+  margin: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+}
+
+.data-card {
+  background: white;
+  height: 10vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.data-card h1 {
+  font-size: 3rem;
+  text-align: right;
+}
+
+.data-card h4 {
+  font-size: 1.2rem;
+}
+
+/* ///// NEWS PART  */
+
+.news {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.news img {
+  height: 20vh;
+}
+
 @media screen and (max-width: 1000px) {
-  .map {
+  .main {
     display: none;
   }
 
@@ -213,5 +267,8 @@ html {
 
   .dashboard {
     grid-template-columns: 0.5fr 3fr;
+  }
+  .main {
+    display: none;
   }
 }
